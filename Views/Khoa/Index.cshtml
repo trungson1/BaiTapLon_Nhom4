@@ -1,0 +1,41 @@
+@model IEnumerable<QL_SinhVien.Models.Khoa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Danh sách khoa</h1>
+
+<p>
+    <a asp-action="Create">Tạo khoa mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+              @Html.DisplayNameFor(model => model.MaKhoa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenKhoa)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaKhoa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhoa)
+            </td>
+       
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MaKhoa">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MaKhoa">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MaKhoa">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

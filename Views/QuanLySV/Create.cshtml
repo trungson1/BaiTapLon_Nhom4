@@ -1,0 +1,60 @@
+@model QL_SinhVien.Models.QuanLySV
+
+@{
+    ViewData["Title"] = "Create";
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+}
+
+<h2>Create</h2>
+
+<h1 class="w3-container w3-center"> 
+      Quản Lí sinh viên 
+</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaSV" class="control-label"></label>
+                <input asp-for="MaSV" class="form-control" />
+                <span asp-validation-for="MaSV" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TenSV" class="control-label"></label>
+                <input asp-for="TenSV" class="form-control" />
+                <span asp-validation-for="TenSV" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NgaySinh" class="control-label"></label>
+                <input asp-for="NgaySinh" class="form-control" />
+                <span asp-validation-for="NgaySinh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SDT" class="control-label"></label>
+                <input asp-for="SDT" class="form-control" />
+                <span asp-validation-for="SDT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenLop" class="control-label"></label>
+                <select asp-for="TenLop" class ="form-control" asp-items="ViewBag.TenLop"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenKhoa" class="control-label"></label>
+                <select asp-for="TenKhoa" class ="form-control" asp-items="ViewBag.TenKhoa"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary w3-panel w3-padding-small w3-blue" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
