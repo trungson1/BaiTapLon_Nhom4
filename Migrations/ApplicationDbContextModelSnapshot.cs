@@ -44,6 +44,40 @@ namespace QL_SinhVien.Migrations
                     b.ToTable("Lop");
                 });
 
+            modelBuilder.Entity("QL_SinhVien.Models.QuanLyDiem", b =>
+                {
+                    b.Property<string>("TenMon")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Diem")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TenSV")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("TenMon");
+
+                    b.HasIndex("TenSV");
+
+                    b.ToTable("QuanLyDiem");
+                });
+
+            modelBuilder.Entity("QL_SinhVien.Models.QuanLyMonHoc", b =>
+                {
+                    b.Property<string>("MaMon")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TenMon")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("MaMon");
+
+                    b.ToTable("QuanLyMonHoc");
+                });
+
             modelBuilder.Entity("QL_SinhVien.Models.QuanLySV", b =>
                 {
                     b.Property<string>("MaSV")
@@ -76,6 +110,25 @@ namespace QL_SinhVien.Migrations
                     b.HasIndex("TenLop");
 
                     b.ToTable("QuanLySV");
+                });
+
+            modelBuilder.Entity("QL_SinhVien.Models.QuanLyDiem", b =>
+                {
+                    b.HasOne("QL_SinhVien.Models.QuanLyMonHoc", "QuanLyMonHoc")
+                        .WithMany()
+                        .HasForeignKey("TenMon")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("QL_SinhVien.Models.QuanLySV", "QuanLySV")
+                        .WithMany()
+                        .HasForeignKey("TenSV")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("QuanLyMonHoc");
+
+                    b.Navigation("QuanLySV");
                 });
 
             modelBuilder.Entity("QL_SinhVien.Models.QuanLySV", b =>

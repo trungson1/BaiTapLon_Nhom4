@@ -1,0 +1,42 @@
+@model QL_SinhVien.Models.QuanLyDiem
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Thêm điểm</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TenMon" class="control-label">Tên Môn Học</label>
+                <select asp-for="TenMon" class ="form-control" asp-items="ViewBag.TenMon"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenSV" class="control-label">Tên Sinh Viên</label>
+                <select asp-for="TenSV" class ="form-control" asp-items="ViewBag.TenSV"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Diem" class="control-label">Điểm</label>
+                <input asp-for="Diem" class="form-control" />
+                <span asp-validation-for="Diem" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Thêm" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Quay Lại</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

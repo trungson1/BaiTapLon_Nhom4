@@ -204,7 +204,6 @@ D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\ru\Microsoft.CodeAnalysis.Workspaces.r
 D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
 D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\alpine-arm\native\libe_sqlite3.so
 D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\alpine-arm64\native\libe_sqlite3.so
 D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\alpine-x64\native\libe_sqlite3.so
@@ -228,8 +227,6 @@ D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\win-arm\native\e_sqlite3.dll
 D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\win-arm64\native\e_sqlite3.dll
 D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\win-x64\native\e_sqlite3.dll
 D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\win-x86\native\e_sqlite3.dll
-D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
-D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 D:\BTL_Nhom4\QL_SinhVien\obj\Debug\net7.0\QL_SinhVien.csproj.AssemblyReference.cache
@@ -256,3 +253,15 @@ D:\BTL_Nhom4\QL_SinhVien\obj\Debug\net7.0\refint\QL_SinhVien.dll
 D:\BTL_Nhom4\QL_SinhVien\obj\Debug\net7.0\QL_SinhVien.pdb
 D:\BTL_Nhom4\QL_SinhVien\obj\Debug\net7.0\QL_SinhVien.genruntimeconfig.cache
 D:\BTL_Nhom4\QL_SinhVien\obj\Debug\net7.0\ref\QL_SinhVien.dll
+D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\EPPlus.dll
+D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\EPPlus.Interfaces.dll
+D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\EPPlus.System.Drawing.dll
+D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\Microsoft.IO.RecyclableMemoryStream.dll
+D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\System.Security.Cryptography.Pkcs.dll
+D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
+D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
+D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll
+D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\JetBrains.Annotations.dll
+D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\X.PagedList.dll
+D:\BTL_Nhom4\QL_SinhVien\bin\Debug\net7.0\X.PagedList.Mvc.Core.dll
+D:\BTL_Nhom4\QL_SinhVien\obj\Debug\net7.0\QL_SinhVien.MvcApplicationPartsAssemblyInfo.cs

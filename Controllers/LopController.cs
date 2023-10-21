@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QL_SinhVien.Data;
 using QL_SinhVien.Models;
-
+using QL_SinhVien.Models.Process;
+using X.PagedList;
 namespace QL_SinhVien.Controllers
 {
     public class LopController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private ExcelProcess _excelProcess = new ExcelProcess();
 
         public LopController(ApplicationDbContext context)
         {
@@ -20,11 +22,22 @@ namespace QL_SinhVien.Controllers
         }
 
         // GET: Lop
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index( int? page, int? PageSize )
         {
-              return _context.Lop != null ? 
-                          View(await _context.Lop.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Lop'  is null.");
+            ViewBag.PageSize = new List<SelectListItem>()
+        {
+            new SelectListItem() {Value="3", Text = "3"},
+            new SelectListItem() {Value="5", Text = "5"},
+            new SelectListItem() {Value="10", Text = "10"},
+            new SelectListItem() {Value="15", Text = "15"},
+            new SelectListItem() {Value="25", Text = "25"},
+
+
+        };
+        int pagesize = (PageSize ?? 3);
+        ViewBag.psize = pagesize;
+        var model = _context.Lop.ToList().ToPagedList (page ?? 1, pagesize);
+        return View (model);
         }
 
         // GET: Lop/Details/5
@@ -153,6 +166,46 @@ namespace QL_SinhVien.Controllers
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Upload()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+         public async Task<IActionResult>Upload(IFormFile file)
+        {
+            if (file!=null)
+            {
+                string fileExtension = Path.GetExtension(file.FileName);
+                if (fileExtension != ".xls" && fileExtension != ".xlsx")
+                {
+                    ModelState.AddModelError("","Please choose excel file to upload");
+                }
+                else
+                {
+                    var fileName = DateTime.Now.ToShortTimeString() + fileExtension;
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory()+ "/Uploads/Excels", fileName);
+                    var fileLocation = new FileInfo(filePath).ToString();
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                        //đọc dữ liệu từ Excel vào Data
+                        var dt = _excelProcess.ExcelToDataTable(fileLocation);
+                        //tìm kiếm đọc dữ liệu từ dt
+                        for (int i = 0; i <dt.Rows.Count; i++)
+                        {
+                            var ps = new Lop();
+                            ps.MaLop = dt.Rows[i][0].ToString();
+                            ps.TenLop = dt.Rows[i][1].ToString();
+                            _context.Add(ps);
+                        }
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+            }
+            return View();
         }
 
         private bool LopExists(string id)

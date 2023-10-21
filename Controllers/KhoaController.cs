@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QL_SinhVien.Data;
 using QL_SinhVien.Models;
-
+using X.PagedList;
 namespace QL_SinhVien.Controllers
 {
     public class KhoaController : Controller
@@ -20,11 +20,22 @@ namespace QL_SinhVien.Controllers
         }
 
         // GET: Khoa
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index( int? page, int? PageSize )
         {
-              return _context.Khoa != null ? 
-                          View(await _context.Khoa.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Khoa'  is null.");
+            ViewBag.PageSize = new List<SelectListItem>()
+        {
+            new SelectListItem() {Value="3", Text = "3"},
+            new SelectListItem() {Value="5", Text = "5"},
+            new SelectListItem() {Value="10", Text = "10"},
+            new SelectListItem() {Value="15", Text = "15"},
+            new SelectListItem() {Value="25", Text = "25"},
+
+
+        };
+        int pagesize = (PageSize ?? 3);
+        ViewBag.psize = pagesize;
+        var model = _context.Khoa.ToList().ToPagedList (page ?? 1, pagesize);
+        return View (model);
         }
 
         // GET: Khoa/Details/5

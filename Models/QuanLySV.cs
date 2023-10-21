@@ -13,7 +13,6 @@ namespace QL_SinhVien.Models
         
         [Display(Name = "Họ và tên")]
         public string TenSV { get; set; }
-        [ForeignKey("MaSV")]
         [Display(Name = "Ngày Sinh")]
         [DataType(DataType.Date)]
         public string NgaySinh {get; set; } 

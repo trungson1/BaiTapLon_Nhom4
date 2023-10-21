@@ -1,26 +1,25 @@
 @model IEnumerable<QL_SinhVien.Models.QuanLySV>
-
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
 @{
     ViewData["Title"] = "Index";
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 }
 
-<h1 class="w3-container w3-center"> 
-      Quản Lí sinh viên 
-</h1>
-
-<h2>Danh sách sinh viên</h2>
+<h1>Danh sách Sinh viên</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Thêm Sinh Viên</a>
+    <br>
+    <a class = "btn btn-success" asp-action="Download">Dowload</a>
+
 </p>
-<table class="w3-table-all w3-centered ">
+<table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.MaSV)
             </th>
-            <th>
+             <th>
                 @Html.DisplayNameFor(model => model.TenSV)
             </th>
             <th>
@@ -29,42 +28,68 @@
             <th>
                 @Html.DisplayNameFor(model => model.SDT)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lop)
+             <th>
+                @Html.DisplayNameFor(model => model.TenLop)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Khoa)
+             <th>
+                @Html.DisplayNameFor(model => model.TenKhoa)
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaSV)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TenSV)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NgaySinh)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SDT)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Lop.TenLop)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Khoa.TenKhoa)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.MaSV">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.MaSV">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.MaSV">Delete</a>
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaSV)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.TenSV)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.NgaySinh)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.SDT)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.TenLop)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhoa)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MaSV">Sửa</a> |
+                <a asp-action="Details" asp-route-id="@item.MaSV">Chi tiết</a> |
+                <a asp-action="Delete" asp-route-id="@item.MaSV">Xoá</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>
+
+@using (Html.BeginForm("Index", "Nhanvien", FormMethod.Get, new {id = "form1"}))
+{
+    <div class="row">
+        <div class="col-md-11">
+            @Html.PagedListPager((IPagedList) Model, page => Url.Action("Index", new {page = page, 
+            pageSize = ViewBag.psize}),
+            new X.PagedList.Web.Common.PagedListRenderOptions { LiElementClasses = new string[] {"page-item"}, 
+            PageClasses = new string[] { "page-link" }})
+
+        </div>
+        <div class = "col-md-1">
+            @Html.DropDownList("pageSize",null,new{ @class= "form-select"})
+
+        </div>
+
+    </div>
+}
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+    $(document).ready(function){
+        $("#pageSize"). change(function () {
+            $("#form1").submit();
+        });
+    });
+</script>
