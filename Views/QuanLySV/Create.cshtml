@@ -12,8 +12,8 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="MaSV" class="control-label">Mã Sinh Viên</label>
-                <input asp-for="MaSV" class="form-control" />
+                <label asp-for="MaSV" class="control-label"></label>
+                <input asp-for="MaSV" class="form-control" value="@ViewBag.MaSV" readonly/>
                 <span asp-validation-for="MaSV" class="text-danger"></span>
             </div>
             <div class="form-group">

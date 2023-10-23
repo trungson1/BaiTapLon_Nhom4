@@ -9,12 +9,14 @@ using QL_SinhVien.Data;
 using OfficeOpenXml;
 using QL_SinhVien.Models;
 using X.PagedList;
+using QL_SinhVien.Models.Process;
 
 namespace qlnv.Controllers
 {
     public class QuanLySVController : Controller
     {
         private readonly ApplicationDbContext _context;
+        StringProcess strPro = new StringProcess();
 
         public QuanLySVController(ApplicationDbContext context)
         {
@@ -63,7 +65,19 @@ namespace qlnv.Controllers
         {
             ViewData["TenLop"] = new SelectList(_context.Set<Lop>(), "MaLop", "TenLop");
             ViewData["TenKhoa"] = new SelectList(_context.Set<Khoa>(), "MaKhoa", "TenKhoa");
-            
+           
+            var newID = "";
+            if (_context.QuanLySV.Count() == 0)
+            {
+                //khoi tao 1 ma moi
+                newID = "ACCO01";
+            }
+            else
+            {
+                var id = _context.QuanLySV.OrderByDescending(m => m.MaSV).First().MaSV;
+                newID = strPro.AutoGenerateKey(id);
+            }
+            ViewBag.MaSV = newID;
             return View();
         }
         [HttpPost]
