@@ -20,7 +20,6 @@ namespace qlnv.Controllers
         {
             _context = context;
         }
-
          public async Task<IActionResult> Index( int? page, int? PageSize )
         {
             ViewBag.PageSize = new List<SelectListItem>()
@@ -62,8 +61,8 @@ namespace qlnv.Controllers
         // GET: Nhanvien/Create
         public IActionResult Create()
         {
-            ViewData["TenLop"]= new SelectList (_context.Lop,"MaLop","TenLop");
-            ViewData["TenKhoa"]= new SelectList (_context.Khoa,"MaKhoa","TenKhoa");
+            ViewData["TenLop"] = new SelectList(_context.Set<Lop>(), "MaLop", "TenLop");
+            ViewData["TenKhoa"] = new SelectList(_context.Set<Khoa>(), "MaKhoa", "TenKhoa");
             
             return View();
         }
@@ -77,9 +76,8 @@ namespace qlnv.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewData["TenLop"]= new SelectList (_context.Lop,"MaLop","TenLop");
-            ViewData["TenKhoa"]= new SelectList (_context.Khoa,"MaKhoa","TenKhoa");
+            ViewData["TenLop"] = new SelectList(_context.Set<Lop>(), "MaLop", "TenLop", quanLySV.TenLop);
+            ViewData["TenKhoa"] = new SelectList(_context.Set<Khoa>(), "MaKhoa", "TenKhoa", quanLySV.TenKhoa);
             return View(quanLySV);
         }
         public async Task<IActionResult> Edit(string id)
@@ -173,19 +171,12 @@ namespace qlnv.Controllers
             using (ExcelPackage excelPackage =new ExcelPackage())
             {
                 ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Sheet 1");
-                worksheet.Cells["A1"].Value = "Manv";
-                worksheet.Cells["B1"].Value = "Hoten";
-                worksheet.Cells["C1"].Value = "Gioitinh";
-                worksheet.Cells["D1"].Value = "Ngaysinh";
-                worksheet.Cells["E1"].Value = "CCCD";
-                worksheet.Cells["F1"].Value = "Sdt";
-                worksheet.Cells["G1"].Value = "Diachi";
-                worksheet.Cells["H1"].Value = "Email";
-                worksheet.Cells["I1"].Value = "Macv";
-                worksheet.Cells["J1"].Value = "Matd";
-                worksheet.Cells["K1"].Value = "Mabp";
-                worksheet.Cells["L1"].Value = "Mpc";
-
+                worksheet.Cells["A1"].Value = "MaSV";
+                worksheet.Cells["B1"].Value = "TenSV";
+                worksheet.Cells["C1"].Value = "NgaySinh";
+                worksheet.Cells["D1"].Value = "SDT";
+                worksheet.Cells["E1"].Value = "TenLop";
+                worksheet.Cells["F1"].Value = "TenKhoa";
                 var personList = _context.QuanLySV.ToList();
                 worksheet.Cells["A2"].LoadFromCollection(personList);
                 var stream = new MemoryStream(excelPackage.GetAsByteArray());

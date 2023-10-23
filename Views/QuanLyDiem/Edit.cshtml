@@ -4,22 +4,23 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Sửa</h1>
+<h1>Edit</h1>
 
+<h4>Danh sách Điểm</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Diem" />
+            <input type="hidden" asp-for="TenMon" />
             <div class="form-group">
-                <label asp-for="TenMon" class="control-label"></label>
-                <input asp-for="TenMon" class="form-control" />
+                <label asp-for="TenMon" class="control-label">Mã Môn Học</label>
+                <select asp-for="TenMon" class="form-control" asp-items="ViewBag.TenMon"></select>
                 <span asp-validation-for="TenMon" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TenSV" class="control-label"></label>
-                <input asp-for="TenSV" class="form-control" />
+                <label asp-for="TenSV" class="control-label">Mã Sinh Viên</label>
+                <select asp-for="TenSV" class="form-control" asp-items="ViewBag.TenSV"></select>
                 <span asp-validation-for="TenSV" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -27,16 +28,15 @@
                 <input asp-for="Diem" class="form-control" />
                 <span asp-validation-for="Diem" class="text-danger"></span>
             </div>
-            <br>
             <div class="form-group">
-                <input type="submit" value="Lưu" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Quay Lại</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

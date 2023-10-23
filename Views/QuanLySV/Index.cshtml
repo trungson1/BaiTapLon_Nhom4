@@ -29,10 +29,10 @@
                 @Html.DisplayNameFor(model => model.SDT)
             </th>
              <th>
-                @Html.DisplayNameFor(model => model.TenLop)
+                @Html.DisplayNameFor(model => model.Lop)
             </th>
              <th>
-                @Html.DisplayNameFor(model => model.TenKhoa)
+                @Html.DisplayNameFor(model => model.Khoa)
             </th>
             <th></th>
         </tr>
@@ -68,7 +68,7 @@
     </tbody>
 </table>
 
-@using (Html.BeginForm("Index", "Nhanvien", FormMethod.Get, new {id = "form1"}))
+@using (Html.BeginForm("Index", "SinhVien", FormMethod.Get, new {id = "form1"}))
 {
     <div class="row">
         <div class="col-md-11">

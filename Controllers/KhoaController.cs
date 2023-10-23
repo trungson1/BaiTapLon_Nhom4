@@ -8,11 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using QL_SinhVien.Data;
 using QL_SinhVien.Models;
 using X.PagedList;
+using QL_SinhVien.Models.Process;
 namespace QL_SinhVien.Controllers
 {
     public class KhoaController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private ExcelProcess _excelProcess = new ExcelProcess();
 
         public KhoaController(ApplicationDbContext context)
         {
@@ -164,6 +166,46 @@ namespace QL_SinhVien.Controllers
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Upload()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+         public async Task<IActionResult>Upload(IFormFile file)
+        {
+            if (file!=null)
+            {
+                string fileExtension = Path.GetExtension(file.FileName);
+                if (fileExtension != ".xls" && fileExtension != ".xlsx")
+                {
+                    ModelState.AddModelError("","Please choose excel file to upload");
+                }
+                else
+                {
+                    var fileName = DateTime.Now.ToShortTimeString() + fileExtension;
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory()+ "/Uploads/Excels", fileName);
+                    var fileLocation = new FileInfo(filePath).ToString();
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                        //đọc dữ liệu từ Excel vào Data
+                        var dt = _excelProcess.ExcelToDataTable(fileLocation);
+                        //tìm kiếm đọc dữ liệu từ dt
+                        for (int i = 0; i <dt.Rows.Count; i++)
+                        {
+                            var ps = new Khoa();
+                            ps.MaKhoa = dt.Rows[i][0].ToString();
+                            ps.TenKhoa = dt.Rows[i][1].ToString();
+                            _context.Add(ps);
+                        }
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+            }
+            return View();
         }
 
         private bool KhoaExists(string id)

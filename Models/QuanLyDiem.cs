@@ -7,15 +7,15 @@ namespace QL_SinhVien.Models
     public class QuanLyDiem
     {
         [Key]
-        [Display(Name = "Tên Môn Học")]
+        
         public string TenMon { get; set; }
         [ForeignKey("TenMon")]
+        [Display(Name = "Mã Môn Học")]
         public QuanLyMonHoc? QuanLyMonHoc { get; set; }
         
-        [Display(Name = "Tên Sinh Viên")]
-
         public string TenSV { get; set; } 
         [ForeignKey("TenSV")]
+        [Display(Name = "Mã Sinh Viên")]
         public QuanLySV? QuanLySV { get; set; }
         [Display(Name = "Điểm")]
         public string Diem {get; set;}

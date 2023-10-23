@@ -2,11 +2,14 @@
 
 @{
     ViewData["Title"] = "Create";
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 }
 
-<h1>Thêm điểm</h1>
+<h2>Create</h2>
 
-
+<h1 class="w3-container w3-center"> 
+      Quản Lí Điểm
+</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,20 +24,19 @@
                 <select asp-for="TenSV" class ="form-control" asp-items="ViewBag.TenSV"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Diem" class="control-label">Điểm</label>
+                <label asp-for="Diem" class="control-label"></label>
                 <input asp-for="Diem" class="form-control" />
                 <span asp-validation-for="Diem" class="text-danger"></span>
             </div>
-            <br>
             <div class="form-group">
-                <input type="submit" value="Thêm" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary w3-panel w3-padding-small w3-blue" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Quay Lại</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
